@@ -8,6 +8,11 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
   <h2>Ulubione Gnomy</h2>
   <% current_user.profiles.each do |profile| %>
     <h3><%= profile.route_id %></h3>
+    <% @routes.each do |route| %>
+    	<% if route.id == profile.route_id %>
+    		<h3><%= route.route_name %></h3>
+    	<% end %>
+    <% end %>
   <% end %>
 <% else %>
   Nie jesteś zalogowany.
