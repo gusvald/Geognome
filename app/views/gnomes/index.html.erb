@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Gnomes</h1>
+
+<div id="gnomes">
+  <% @gnomes.each do |gnome| %>
+    <%= render gnome %>
+    <p>
+      <%= link_to "Show this gnome", gnome %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New gnome", new_gnome_path %>

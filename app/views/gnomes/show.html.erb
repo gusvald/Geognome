@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @gnome %>
+
+<div>
+  <%= link_to "Edit this gnome", edit_gnome_path(@gnome) %> |
+  <%= link_to "Back to gnomes", gnomes_path %>
+
+  <%= button_to "Destroy this gnome", @gnome, method: :delete %>
+</div>

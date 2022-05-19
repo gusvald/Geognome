@@ -1,0 +1,14 @@
+<%= image_tag ('gnome.png') %>
+<h1>Geognome!</h1>
+<p>
+System naprowadzania i zarządzania wrocławskim krasnalami! 
+</p>
+
+<% if logged_in? %>
+  <h2>Ulubione Gnomy</h2>
+  <% current_user.profiles.each do |profile| %>
+    <h3><%= profile.route_id %></h3>
+  <% end %>
+<% else %>
+  Nie jesteś zalogowany.
+<% end %>

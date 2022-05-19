@@ -1,0 +1,42 @@
+<%= form_with(model: gnome) do |form| %>
+  <% if gnome.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(gnome.errors.count, "error") %> prohibited this gnome from being saved:</h2>
+
+      <ul>
+        <% gnome.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :route_id, style: "display: block" %>
+    <%= form.number_field :route_id %>
+  </div>
+
+  <div>
+    <%= form.label :gnome_name, style: "display: block" %>
+    <%= form.text_field :gnome_name %>
+  </div>
+
+  <div>
+    <%= form.label :g_description, style: "display: block" %>
+    <%= form.text_field :g_description %>
+  </div>
+
+  <div>
+    <%= form.label :location_x, style: "display: block" %>
+    <%= form.text_field :location_x %>
+  </div>
+
+  <div>
+    <%= form.label :location_y, style: "display: block" %>
+    <%= form.text_field :location_y %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
