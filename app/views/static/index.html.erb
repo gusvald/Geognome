@@ -1,3 +1,17 @@
+<head>
+	<style>
+		section{
+			display: flex;
+			text-align: center;
+			flex-direction: column;
+			border: 1px solid black;
+			width: min;
+			justify-content: center;
+			max-width: 10em;
+		}
+	</style>
+</head>
+
 <%= image_tag ('gnome.png') %>
 <h1>Geognome!</h1>
 <p>
@@ -7,12 +21,39 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
 <% if logged_in? %>
   <h2>Ulubione Gnomy</h2>
   <% current_user.profiles.each do |profile| %>
-    <h3><%= profile.route_id %></h3>
-    <% @routes.each do |route| %>
-    	<% if route.id == profile.route_id %>
-    		<h3><%= route.route_name %></h3>
-    	<% end %>
-    <% end %>
+  	<% @roles.each do |role| %>
+  		<% if profile.role_id == role.id %>
+  			<% if profile.role_id == 1 %>
+			    <% @routes.each do |route| %>
+			    	<% if route.id == profile.route_id %>
+			    		<h3><%= route.route_name %></h3>
+			    			<% @gnomes.each do |gnome| %>
+			    			<% if gnome.route_id == route.id %>
+			    			<section>
+			    				<p><%= gnome.gnome_name %></p>
+			    				<p><%= gnome.g_description %></p>
+			    				<p>X: <%= gnome.location_x %> Y: <%= gnome.location_y %></p>
+			    			<section>
+			    			<% end %>
+			    		<% end %>
+			    	<% end %>
+			    <% end %>
+  			<% end %>
+  			<% if profile.role_id == 2 %>
+  				<%= render @user %>
+
+				<div>
+				  <%= link_to "Edit this user", edit_user_path(@user) %> |
+				  <%= link_to "Back to users", users_path %>
+
+				  <%= button_to "Destroy this user", @user, method: :delete %>
+				</div>
+  			<% end %>
+  			<% if profile.role_id == 3 %>
+  			<% end %>
+  		<% end %>
+  	<% end %>
+    
   <% end %>
 <% else %>
   Nie jesteś zalogowany.
