@@ -1,6 +1,8 @@
 class GnomesController < ApplicationController
-  before_action :set_gnome, only: %i[ show edit update destroy ]
-
+  before_action :set_gnome, only: [:show, :edit, :update, :destroy, :like]
+  def like
+    redirect_to "/gnomes"
+  end
   # GET /gnomes or /gnomes.json
   def index
     @gnomes = Gnome.all

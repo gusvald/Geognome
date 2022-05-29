@@ -3,6 +3,9 @@
 <%= render @gnome %>
 
 <div>
+	<% if logged_in? %>
+  		<%= link_to( "Polub gnoma", action: :like) %>
+	<% end %>
   <%= link_to "Edit this gnome", edit_gnome_path(@gnome) %> |
   <%= link_to "Back to gnomes", gnomes_path %>
 

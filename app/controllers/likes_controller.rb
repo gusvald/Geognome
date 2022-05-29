@@ -1,5 +1,5 @@
 class LikesController < ApplicationController
-  before_action :set_like, only: %i[ show edit update destroy ]
+  before_action :set_like, only: %i[ show edit update destroy]
 
   # GET /likes or /likes.json
   def index
@@ -67,4 +67,5 @@ class LikesController < ApplicationController
     def like_params
       params.require(:like).permit(:profile_id, :gnome_id)
     end
+
 end
