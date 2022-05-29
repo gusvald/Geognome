@@ -13,12 +13,12 @@ NULLCMD = :
 #### Start of system configuration section. ####
 
 srcdir = .
-topdir = /Users/sirgus/.rbenv/versions/3.1.2/include/ruby-3.1.0
+topdir = /home/gus/.rbenv/versions/3.1.2/include/ruby-3.1.0
 hdrdir = $(topdir)
-arch_hdrdir = /Users/sirgus/.rbenv/versions/3.1.2/include/ruby-3.1.0/x86_64-darwin21
+arch_hdrdir = /home/gus/.rbenv/versions/3.1.2/include/ruby-3.1.0/x86_64-linux
 PATH_SEPARATOR = :
 VPATH = $(srcdir):$(arch_hdrdir)/ruby:$(hdrdir)/ruby
-prefix = $(DESTDIR)/Users/sirgus/.rbenv/versions/3.1.2
+prefix = $(DESTDIR)/home/gus/.rbenv/versions/3.1.2
 rubysitearchprefix = $(rubylibprefix)/$(sitearch)
 rubyarchprefix = $(rubylibprefix)/$(arch)
 rubylibprefix = $(libdir)/$(RUBY_BASE_NAME)
@@ -32,8 +32,8 @@ rubyhdrdir = $(includedir)/$(RUBY_VERSION_NAME)
 vendorarchdir = $(vendorlibdir)/$(sitearch)
 vendorlibdir = $(vendordir)/$(ruby_version)
 vendordir = $(rubylibprefix)/vendor_ruby
-sitearchdir = $(DESTDIR)./.gem.20220519-82265-fbjxnj
-sitelibdir = $(DESTDIR)./.gem.20220519-82265-fbjxnj
+sitearchdir = $(DESTDIR)./.gem.20220520-28187-y1bak
+sitelibdir = $(DESTDIR)./.gem.20220520-28187-y1bak
 sitedir = $(rubylibprefix)/site_ruby
 rubyarchdir = $(rubylibdir)/$(arch)
 rubylibdir = $(rubylibprefix)/$(ruby_version)
@@ -52,7 +52,7 @@ htmldir = $(docdir)
 infodir = $(datarootdir)/info
 docdir = $(datarootdir)/doc/$(PACKAGE)
 oldincludedir = $(DESTDIR)/usr/include
-includedir = $(SDKROOT)$(prefix)/include
+includedir = $(prefix)/include
 runstatedir = $(localstatedir)/run
 localstatedir = $(prefix)/var
 sharedstatedir = $(prefix)/com
@@ -66,47 +66,47 @@ archdir = $(rubyarchdir)
 
 
 CC_WRAPPER = 
-CC = clang
-CXX = clang++
+CC = gcc
+CXX = g++
 LIBRUBY = $(LIBRUBY_SO)
 LIBRUBY_A = lib$(RUBY_SO_NAME)-static.a
-LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
-LIBRUBYARG_STATIC = -l$(RUBY_SO_NAME)-static -framework CoreFoundation $(MAINLIBS)
+LIBRUBYARG_SHARED = -Wl,-rpath,$(libdir) -L$(libdir) -l$(RUBY_SO_NAME)
+LIBRUBYARG_STATIC = -Wl,-rpath,$(libdir) -L$(libdir) -l$(RUBY_SO_NAME)-static $(MAINLIBS)
 empty =
 OUTFLAG = -o $(empty)
 COUTFLAG = -o $(empty)
 CSRCFLAG = $(empty)
 
 RUBY_EXTCONF_H = 
-cflags   = -fdeclspec $(optflags) $(debugflags) $(warnflags)
+cflags   = $(optflags) $(debugflags) $(warnflags)
 cxxflags = 
 optflags = -O3 -fno-fast-math -fno-strict-aliasing
 debugflags = -ggdb3
-warnflags = -Wall -Wextra -Wdeprecated-declarations -Wdivision-by-zero -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wshorten-64-to-32 -Wwrite-strings -Wold-style-definition -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wunused-variable -Wextra-tokens -Wundef
+warnflags = -Wall -Wextra -Wdeprecated-declarations -Wduplicated-cond -Wimplicit-function-declaration -Wimplicit-int -Wmisleading-indentation -Wpointer-arith -Wwrite-strings -Wimplicit-fallthrough=0 -Wmissing-noreturn -Wno-cast-function-type -Wno-constant-logical-operand -Wno-long-long -Wno-missing-field-initializers -Wno-overlength-strings -Wno-packed-bitfield-compat -Wno-parentheses-equality -Wno-self-assign -Wno-tautological-compare -Wno-unused-parameter -Wno-unused-value -Wsuggest-attribute=format -Wsuggest-attribute=noreturn -Wunused-variable -Wundef
 cppflags = 
-CCDLFLAGS = -fno-common
-CFLAGS   = $(CCDLFLAGS) $(cflags)  -fno-common -pipe $(ARCH_FLAG)
+CCDLFLAGS = -fPIC
+CFLAGS   = $(CCDLFLAGS) $(cflags)  -fPIC $(ARCH_FLAG)
 INCFLAGS = -I. -I$(arch_hdrdir) -I$(hdrdir)/ruby/backward -I$(hdrdir) -I$(srcdir)
 DEFS     = 
-CPPFLAGS = -DHAVE_UNISTD_H -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EVENT_H -DHAVE_SYS_QUEUE_H -DEV_USE_KQUEUE -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H -DEV_STANDALONE -I/Users/sirgus/.rbenv/versions/3.1.2/include  -D_XOPEN_SOURCE -D_DARWIN_C_SOURCE -D_DARWIN_UNLIMITED_SELECT -D_REENTRANT $(DEFS) $(cppflags)
-CXXFLAGS = $(CCDLFLAGS) -fdeclspec $(ARCH_FLAG)
-ldflags  = -L. -L/Users/sirgus/.rbenv/versions/3.1.2/lib  -fstack-protector-strong -L/usr/local/lib
-dldflags = -L/Users/sirgus/.rbenv/versions/3.1.2/lib  -Wl,-undefined,dynamic_lookup -Wl,-multiply_defined,suppress 
+CPPFLAGS = -DHAVE_UNISTD_H -DHAVE_LINUX_AIO_ABI_H -DEV_USE_LINUXAIO -DHAVE_LINUX_IO_URING_H -DEV_USE_IOURING -DHAVE_SYS_SELECT_H -DEV_USE_SELECT -DHAVE_SYS_EPOLL_H -DEV_USE_EPOLL -DHAVE_SYS_RESOURCE_H -DHAVE_SYS_RESOURCE_H -DEV_STANDALONE -I/home/gus/.rbenv/versions/3.1.2/include  $(DEFS) $(cppflags)
+CXXFLAGS = $(CCDLFLAGS)  $(ARCH_FLAG)
+ldflags  = -L. -L/home/gus/.rbenv/versions/3.1.2/lib  -fstack-protector-strong -rdynamic -Wl,-export-dynamic -Wl,--no-as-needed
+dldflags = -L/home/gus/.rbenv/versions/3.1.2/lib  -Wl,--compress-debug-sections=zlib 
 ARCH_FLAG = 
 DLDFLAGS = $(ldflags) $(dldflags) $(ARCH_FLAG)
-LDSHARED = $(CC) -dynamic -bundle
-LDSHAREDXX = $(CXX) -dynamic -bundle
-AR = ar
+LDSHARED = $(CC) -shared
+LDSHAREDXX = $(CXX) -shared
+AR = gcc-ar
 EXEEXT = 
 
 RUBY_INSTALL_NAME = $(RUBY_BASE_NAME)
-RUBY_SO_NAME = ruby.3.1
+RUBY_SO_NAME = ruby
 RUBYW_INSTALL_NAME = 
 RUBY_VERSION_NAME = $(RUBY_BASE_NAME)-$(ruby_version)
 RUBYW_BASE_NAME = rubyw
 RUBY_BASE_NAME = ruby
 
-arch = x86_64-darwin21
+arch = x86_64-linux
 sitearch = $(arch)
 ruby_version = 3.1.0
 ruby = $(bindir)/$(RUBY_BASE_NAME)
@@ -115,8 +115,8 @@ ruby_headers = $(hdrdir)/ruby.h $(hdrdir)/ruby/backward.h $(hdrdir)/ruby/ruby.h 
 
 RM = rm -f
 RM_RF = rm -fr
-RMDIRS = rmdir -p
-MAKEDIRS = mkdir -p
+RMDIRS = rmdir --ignore-fail-on-non-empty -p
+MAKEDIRS = /usr/bin/mkdir -p
 INSTALL = /usr/bin/install -c
 INSTALL_PROG = $(INSTALL) -m 0755
 INSTALL_DATA = $(INSTALL) -m 644
@@ -127,7 +127,7 @@ TOUCH = exit >
 
 preload = 
 libpath = . $(libdir)
-LIBPATH =  -L. -L$(libdir)
+LIBPATH =  -L. -L$(libdir) -Wl,-rpath,$(libdir)
 DEFFILE = 
 
 CLEANFILES = mkmf.log
@@ -138,7 +138,7 @@ extout =
 extout_prefix = 
 target_prefix = 
 LOCAL_LIBS = 
-LIBS = $(LIBRUBYARG_SHARED)   
+LIBS = $(LIBRUBYARG_SHARED)  -lm  -lc
 ORIG_SRCS = bytebuffer.c monitor.c nio4r_ext.c selector.c
 SRCS = $(ORIG_SRCS) 
 OBJS = bytebuffer.o monitor.o nio4r_ext.o selector.o
@@ -147,7 +147,7 @@ LOCAL_HDRS =
 TARGET = nio4r_ext
 TARGET_NAME = nio4r_ext
 TARGET_ENTRY = Init_$(TARGET_NAME)
-DLLIB = $(TARGET).bundle
+DLLIB = $(TARGET).so
 EXTSTATIC = 
 STATIC_LIB = 
 
@@ -160,7 +160,7 @@ HDRDIR        = $(sitehdrdir)$(target_prefix)
 ARCHHDRDIR    = $(sitearchhdrdir)$(target_prefix)
 TARGET_SO_DIR =
 TARGET_SO     = $(TARGET_SO_DIR)$(DLLIB)
-CLEANLIBS     = $(TARGET_SO) $(TARGET_SO).dSYM
+CLEANLIBS     = $(TARGET_SO) false
 CLEANOBJS     = *.o  *.bak
 
 all:    $(DLLIB)
@@ -261,7 +261,6 @@ $(TARGET_SO): $(OBJS) Makefile
 	$(ECHO) linking shared-object $(DLLIB)
 	-$(Q)$(RM) $(@)
 	$(Q) $(LDSHARED) -o $@ $(OBJS) $(LIBPATH) $(DLDFLAGS) $(LOCAL_LIBS) $(LIBS)
-	$(Q) $(POSTLINK)
 
 
 

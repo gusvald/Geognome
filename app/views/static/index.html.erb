@@ -1,15 +1,5 @@
 <head>
-	<style>
-		section{
-			display: flex;
-			text-align: center;
-			flex-direction: column;
-			border: 1px solid black;
-			width: min;
-			justify-content: center;
-			max-width: 10em;
-		}
-	</style>
+
 </head>
 
 <%= image_tag ('gnome.png') %>
@@ -26,14 +16,15 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
   			<% if profile.role_id == 1 %>
 			    <% @routes.each do |route| %>
 			    	<% if route.id == profile.route_id %>
-			    		<h3><%= route.route_name %></h3>
+			    		<h3>Wybrana trasa: <%= route.route_name %><br>-----------------------------</h3><br><br>
 			    			<% @gnomes.each do |gnome| %>
-			    			<% if gnome.route_id == route.id %>
-			    			<section>
+			    			<% if gnome.route_id == route.id%>
+			    			
 			    				<p><%= gnome.gnome_name %></p>
 			    				<p><%= gnome.g_description %></p>
 			    				<p>X: <%= gnome.location_x %> Y: <%= gnome.location_y %></p>
-			    			<section>
+			    				<br><br>
+
 			    			<% end %>
 			    		<% end %>
 			    	<% end %>
