@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   root to: 'static#index'
 
+  get '/gnomesss', to: 'static#gnomesss'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   get '/logout',  to: 'sessions#destroy'

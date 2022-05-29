@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  swagger_controller :users, "Users"
 
+  swagger_api :index do
+    summary 'Returns all students'
+    notes 'Notes...'
+  end
   # GET /users or /users.json
   def index
     @users = User.all
