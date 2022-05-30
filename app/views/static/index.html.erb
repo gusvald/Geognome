@@ -1,6 +1,13 @@
 <head>
 	<style>
-		section{
+		#trasa{
+			display: flex;
+			flex-direction: row;
+		}
+		#gnomes{
+			display: flex;
+		}
+		div{
 			display: flex;
 			text-align: center;
 			flex-direction: column;
@@ -9,6 +16,7 @@
 			justify-content: center;
 			max-width: 10em;
 		}
+
 	</style>
 </head>
 
@@ -17,9 +25,12 @@
 <p>
 System naprowadzania i zarządzania wrocławskim krasnalami! 
 </p>
-
 <% if logged_in? %>
   <h2>Ulubione Gnomy</h2>
+  <h2>Wybierz gnoma</h2>
+  <section id='gnomes'>
+  	<%= render @gnomes %>
+  </section>
   <% current_user.profiles.each do |profile| %>
   	<% @roles.each do |role| %>
   		<% if profile.role_id == role.id %>
@@ -27,16 +38,18 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
 			    <% @routes.each do |route| %>
 			    	<% if route.id == profile.route_id %>
 			    		<h3><%= route.route_name %></h3>
+			    			<section id='trasa'>
 			    			<% @gnomes.each do |gnome| %>
 			    			<% if gnome.route_id == route.id %>
-			    			<section>
+			    			<div>
 			    				<p><%= gnome.gnome_name %></p>
 			    				<p><%= gnome.g_description %></p>
 			    				<p>X: <%= gnome.location_x %> Y: <%= gnome.location_y %></p>
-			    				<button>
-			    			<section>
+			    				
+			    			</div>
 			    			<% end %>
 			    		<% end %>
+			    	</section>
 			    	<% end %>
 			    <% end %>
   			<% end %>

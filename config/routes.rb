@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   get '/gnomes/:id/unlike', to: 'gnomes#unlike'
 
 
-  resources :likes
+  resources :likes do
+    resources :gnomes
+    resources :profiles
+  end
   resources :gnomes
   resources :profiles
   resources :routes
