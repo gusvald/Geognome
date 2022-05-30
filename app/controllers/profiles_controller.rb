@@ -1,12 +1,22 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: %i[ show edit update destroy ]
+  swagger_controller :profiles, 'Profiles'
 
   # GET /profiles or /profiles.json
+  swagger_api :index do
+    summary 'Returns all profiles'
+    notes 'Notes...'
+  end
   def index
     @profiles = Profile.all
   end
 
   # GET /profiles/1 or /profiles/1.json
+  swagger_api :show do
+    summary 'Returns one profile'
+    param :path, :id, :integer, :required, "Profiles id"
+    notes 'Notes...'
+  end
   def show
   end
 
@@ -20,6 +30,14 @@ class ProfilesController < ApplicationController
   end
 
   # POST /profiles or /profiles.json
+  swagger_api :create do
+    summary "Create a profile"
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :form, "profile[title]", :string, "Profile title"
+    param :form, "user_id", :integer, :required, "User id"
+    param :form, "route_id", :integer, :required, "Route id"
+    param :form, "role_id", :integer, :required, "Role id"
+  end
   def create
     @profile = Profile.new(profile_params)
 
@@ -35,6 +53,15 @@ class ProfilesController < ApplicationController
   end
 
   # PATCH/PUT /profiles/1 or /profiles/1.json
+  swagger_api :update do
+    summary "Update a profile"
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "Profile id"
+    param :form, "profile[title]", :string, "Profile title"
+    param :form, "user_id", :integer, :required, "User id"
+    param :form, "route_id", :integer, :required, "Route id"
+    param :form, "role_id", :integer, :required, "Role id"
+  end
   def update
     respond_to do |format|
       if @profile.update(profile_params)
@@ -48,6 +75,11 @@ class ProfilesController < ApplicationController
   end
 
   # DELETE /profiles/1 or /profiles/1.json
+  swagger_api :destroy do
+    summary "Destroy a profile"
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "Profile id"
+  end
   def destroy
     @profile.destroy
 

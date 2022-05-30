@@ -1,0 +1,167 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "profiles",
+  "apis": [
+    {
+      "path": "/likes/{like_id}/profiles",
+      "operations": [
+        {
+          "summary": "Returns all profiles",
+          "notes": "Notes...",
+          "nickname": "Profiles#index",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/likes/{like_id}/profiles",
+      "operations": [
+        {
+          "summary": "Create a profile",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "profile[title]",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_id",
+              "type": "integer",
+              "description": "User id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "route_id",
+              "type": "integer",
+              "description": "Route id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "role_id",
+              "type": "integer",
+              "description": "Role id",
+              "required": true
+            }
+          ],
+          "nickname": "Profiles#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/likes/{like_id}/profiles/{id}",
+      "operations": [
+        {
+          "summary": "Returns one profile",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Profiles id",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Profiles#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/likes/{like_id}/profiles/{id}",
+      "operations": [
+        {
+          "summary": "Update a profile",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Profile id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "profile[title]",
+              "type": "string",
+              "description": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_id",
+              "type": "integer",
+              "description": "User id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "route_id",
+              "type": "integer",
+              "description": "Route id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "role_id",
+              "type": "integer",
+              "description": "Role id",
+              "required": true
+            }
+          ],
+          "nickname": "Profiles#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/likes/{like_id}/profiles/{id}",
+      "operations": [
+        {
+          "summary": "Destroy a profile",
+          "parameters": [
+            {
+              "paramType": "header",
+              "name": "Authorization",
+              "type": "string",
+              "description": "Authentication token",
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Profile id",
+              "required": true
+            }
+          ],
+          "nickname": "Profiles#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

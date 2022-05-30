@@ -1,14 +1,25 @@
 class GnomesController < ApplicationController
   before_action :set_gnome, only: [:show, :edit, :update, :destroy, :like]
+swagger_controller :gnome, 'Gnome'
+  #!!!!!!!! TU TRZEBA SWAGGERA
   def like
     redirect_to "/gnomes"
   end
   # GET /gnomes or /gnomes.json
+  swagger_api :index do
+    summary 'Returns all gnomes'
+    notes 'Notes...'
+  end
   def index
     @gnomes = Gnome.all
   end
 
   # GET /gnomes/1 or /gnomes/1.json
+  swagger_api :show do
+    summary 'Returns one gnome'
+    param :path, :id, :integer, :required, "Gnomes id"
+    notes 'Notes...'
+  end
   def show
   end
 
@@ -22,6 +33,15 @@ class GnomesController < ApplicationController
   end
 
   # POST /gnomes or /gnomes.json
+  swagger_api :create do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary "Create a gnome"
+    param :form, "gnome[g_description]", :string, :required, "Gnome descriptiom"
+    param :form, "gnome[gnome_name]", :string, :required, "Gnome name"
+    param :form, "gnome[location_x]", :float, :required, "Gnome X"
+    param :form, "gnome[location_y]", :float, :required, "Gnome Y"
+    param :form, "route_id", :integer, :required, "Route id"
+  end
   def create
     @gnome = Gnome.new(gnome_params)
 
@@ -37,6 +57,16 @@ class GnomesController < ApplicationController
   end
 
   # PATCH/PUT /gnomes/1 or /gnomes/1.json
+  swagger_api :update do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary "Update a gnome"
+    param :path, :id, :integer, :required, "Gnome id"
+    param :form, "gnome[g_description]", :string, :required, "Gnome descriptiom"
+    param :form, "gnome[gnome_name]", :string, :required, "Gnome name"
+    param :form, "gnome[location_x]", :float, :required, "Gnome X"
+    param :form, "gnome[location_y]", :float, :required, "Gnome Y"
+    param :form, "route_id", :integer, :required, "Route id"
+  end
   def update
     respond_to do |format|
       if @gnome.update(gnome_params)
@@ -50,6 +80,12 @@ class GnomesController < ApplicationController
   end
 
   # DELETE /gnomes/1 or /gnomes/1.json
+  swagger_api :destroy do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary 'Destroys a gnome'
+    param :path, :id, :integer, :required, "Gnome id"
+    notes 'Notes...'
+  end
   def destroy
     @gnome.destroy
 

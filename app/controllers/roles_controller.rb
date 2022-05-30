@@ -1,12 +1,22 @@
 class RolesController < ApplicationController
   before_action :set_role, only: %i[ show edit update destroy ]
+  swagger_controller :roles, 'Roles'
 
   # GET /roles or /roles.json
+  swagger_api :index do
+    summary 'Returns all roles'
+    notes 'Notes...'
+  end
   def index
     @roles = Role.all
   end
 
   # GET /roles/1 or /roles/1.json
+  swagger_api :show do
+    summary 'Returns one role'
+    param :path, :id, :integer, :required, "Role id"
+    notes 'Notes...'
+  end
   def show
   end
 
@@ -20,6 +30,13 @@ class RolesController < ApplicationController
   end
 
   # POST /roles or /roles.json
+  swagger_api :create do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary "Create a role"
+    param :form, "role[role_name]", :string, :required, "Role name"
+    param :form, "role[is_admin]", :bool, :required, "Role power"
+    param :form, "role[is_user]", :bool, :required, "Role power"
+  end
   def create
     @role = Role.new(role_params)
 
@@ -35,6 +52,13 @@ class RolesController < ApplicationController
   end
 
   # PATCH/PUT /roles/1 or /roles/1.json
+  swagger_api :update do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary "Update a role"
+    param :form, "role[role_name]", :string, :required, "Role name"
+    param :form, "role[is_admin]", :bool, :required, "Role power"
+    param :form, "role[is_user]", :bool, :required, "Role power"
+  end
   def update
     respond_to do |format|
       if @role.update(role_params)
@@ -48,9 +72,15 @@ class RolesController < ApplicationController
   end
 
   # DELETE /roles/1 or /roles/1.json
+  swagger_api :destroy do
+    
+    summary 'Destroys a Role'
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "Role id"
+    notes 'Notes...'
+  end
   def destroy
     @role.destroy
-
     respond_to do |format|
       format.html { redirect_to roles_url, notice: "Role was successfully destroyed." }
       format.json { head :no_content }

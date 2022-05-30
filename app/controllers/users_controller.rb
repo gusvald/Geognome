@@ -1,11 +1,27 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_user, only: %i[ show edit update destroy ]
+  swagger_controller :users, 'Users'
+
+  swagger_api :index do
+    summary 'Returns all users'
+    notes 'Notes...'
+  end
+
+  def index
+    @students = Student.all
+  end
 
   # GET /users or /users.json
   def index
     @users = User.all
   end
 
+ swagger_api :show do
+    summary 'Returns one user'
+    param :path, :id, :integer, :required, "User id"
+    notes 'Notes...'
+  end
   # GET /users/1 or /users/1.json
   def show
   end
@@ -18,6 +34,13 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
+
+  swagger_api :create do
+    summary "Create a user"
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :form, "user[login]", :string, :required, "User login"
+    param :form, "user[password]", :string, :required, "User password"
+   end
 
   # POST /users or /users.json
   def create
@@ -35,6 +58,13 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1 or /users/1.json
+  swagger_api :update do
+    summary "Update a user"
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "Users id"
+    param :form, "user[login]", :string, :required, "Users name"
+    param :form, "user[password]", :string, :required, "Users password"
+  end
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -47,7 +77,14 @@ class UsersController < ApplicationController
     end
   end
 
+  
   # DELETE /users/1 or /users/1.json
+  swagger_api :destroy do
+    summary 'Destroys a user'
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "User id"
+    notes 'Notes...'
+  end
   def destroy
     @user.destroy
 

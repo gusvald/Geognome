@@ -1,12 +1,22 @@
 class LikesController < ApplicationController
   before_action :set_like, only: %i[ show edit update destroy]
+  swagger_controller :likes, 'Likes'
 
   # GET /likes or /likes.json
+  swagger_api :index do
+    summary 'Returns all likes'
+    notes 'Notes...'
+  end
   def index
     @likes = Like.all
   end
 
   # GET /likes/1 or /likes/1.json
+  swagger_api :show do
+    summary 'Returns one likes'
+    param :path, :id, :integer, :required, "Likes id"
+    notes 'Notes...'
+  end
   def show
   end
 
@@ -20,6 +30,12 @@ class LikesController < ApplicationController
   end
 
   # POST /likes or /likes.json
+  swagger_api :create do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary "Create a like"
+    param :form, "gnome_id", :integer, :required, "Gnome id"
+    param :form, "profile_id", :integer, :required, "Profile id"
+  end
   def create
     @like = Like.new(like_params)
 
@@ -35,6 +51,13 @@ class LikesController < ApplicationController
   end
 
   # PATCH/PUT /likes/1 or /likes/1.json
+  swagger_api :update do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    param :path, :id, :integer, :required, "Like id"
+    summary "Update a like"
+    param :form, "gnome_id", :integer, :required, "Gnome id"
+    param :form, "profile_id", :integer, :required, "Profile id"
+  end
   def update
     respond_to do |format|
       if @like.update(like_params)
@@ -48,6 +71,12 @@ class LikesController < ApplicationController
   end
 
   # DELETE /likes/1 or /likes/1.json
+  swagger_api :destroy do
+    param :header, "Authorization", :string, :required, "Authentication token"
+    summary 'Destroys a like'
+    param :path, :id, :integer, :required, "Like id"
+    notes 'Notes...'
+  end
   def destroy
     @like.destroy
 

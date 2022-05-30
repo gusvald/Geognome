@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  get '/api' => redirect('/swagger/dist/index.html?url=/api-docs.json')
   get 'sessions/new'
   root to: 'static#index'
+  
 
   get '/gnomesss', to: 'static#gnomesss'
   get    '/login',   to: 'sessions#new'
