@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @gnomes_profile %>
+
+<div>
+  <%= link_to "Edit this gnomes profile", edit_gnomes_profile_path(@gnomes_profile) %> |
+  <%= link_to "Back to gnomes profiles", gnomes_profiles_path %>
+
+  <%= button_to "Destroy this gnomes profile", @gnomes_profile, method: :delete %>
+</div>

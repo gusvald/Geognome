@@ -2,10 +2,10 @@
 
 <%= render @gnome %>
 
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@gnome.location_x},#{@gnome.location_y}&markers=#{@gnome.location_x},#{@gnome.location_y}&zoom=7&size=640x400&key=AIzaSyDZD9M2GdEHVuqyA5m0rvCX6DUPuSzrits",
+              class: 'img-fluid img-rounded', alt: "#{@gnome.gnome_name} on the map"%>
+
 <div>
-	<% if logged_in? %>
-  		<%= link_to( "Polub gnoma", action: :like) %>
-	<% end %>
   <%= link_to "Edit this gnome", edit_gnome_path(@gnome) %> |
   <%= link_to "Back to gnomes", gnomes_path %>
 

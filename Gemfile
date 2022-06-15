@@ -6,6 +6,12 @@ gem 'swagger-docs'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3"
 
+gem 'turbolinks'
+
+gem 'geocoder'
+
+gem 'sprockets', '~> 4'
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 

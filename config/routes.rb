@@ -1,15 +1,20 @@
 Rails.application.routes.draw do
-  get '/api' => redirect('/swagger/dist/index.html?url=/api-docs.json')
+  resources :gnomes_profiles
+  get '/api' => redirect('/swagggger/dist/index.html?url=/api-docs.json')
   get 'sessions/new'
   root to: 'static#index'
   
-
+  get '/cluster.js', to: 'static#cluster'
+  get '/map.css', to: 'static#map'
+  get '/marker.js', to: 'static#marker'
+  get '/style.css', to: 'static#style'
+  get '/geo.js', to: 'static#geo'
   get '/gnomesss', to: 'static#gnomesss'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   get '/logout',  to: 'sessions#destroy'
-  get '/gnomes/:id/like', to: 'gnomes#like'
-  get '/gnomes/:id/unlike', to: 'gnomes#unlike'
+  get '/gnomes/:id/like', to: 'gnomes_profiles#new'
+  get '/gnomes/:id/unlike', to: 'gnomes_profiles#unlike'
 
 
   resources :likes do

@@ -103,6 +103,6 @@ swagger_controller :gnome, 'Gnome'
 
     # Only allow a list of trusted parameters through.
     def gnome_params
-      params.require(:gnome).permit(:route_id, :gnome_name, :g_description, :location_x, :location_y)
+      params.require(:gnome).permit(:route_id, :gnome_name, :g_description, :location_x, :location_y, :address)
     end
 end

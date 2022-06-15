@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_200535) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_235237) do
   create_table "gnomes", force: :cascade do |t|
     t.integer "route_id"
     t.string "gnome_name"
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_200535) do
     t.float "location_y"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "location"
+  end
+
+  create_table "gnomes_profiles", force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "gnome_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "\"profile_id\", \"post_id\"", name: "index_gnomes_profiles_on_profile_id_and_post_id", unique: true
   end
 
   create_table "likes", force: :cascade do |t|

@@ -7,7 +7,7 @@
 		#gnomes{
 			display: flex;
 		}
-		div{
+		article{
 			display: flex;
 			text-align: center;
 			flex-direction: column;
@@ -18,6 +18,9 @@
 		}
 
 	</style>
+      <link rel="stylesheet" type="text/css" href="./style.css" />
+      <link rel="stylesheet" type="text/css" href="./map.css" />
+
 </head>
 
 <%= image_tag ('gnome.png') %>
@@ -27,11 +30,21 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
 </p>
 <% if logged_in? %>
   <h2>Ulubione Gnomy</h2>
+    <% current_user.profiles.each do |profile| %>
+  	<% if profile.role_id == 1 %>
+  		<% profile.gnomes.each do |gnome| %>
+  			<%= gnome.gnome_name %>
+ 		<% end %>
+  	<% end %>
+  <% end %>
+
   <h2>Wybierz gnoma</h2>
   <section id='gnomes'>
-  	<%= render @gnomes %>
+  	<% @gnomes.each do |gnome| %>
+  		<%= render gnome %>
+  	<% end %>
   </section>
-  <% current_user.profiles.each do |profile| %>
+<% current_user.profiles.each do |profile| %>
   	<% @roles.each do |role| %>
   		<% if profile.role_id == role.id %>
   			<% if profile.role_id == 1 %>
@@ -40,13 +53,12 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
 			    		<h3><%= route.route_name %></h3>
 			    			<section id='trasa'>
 			    			<% @gnomes.each do |gnome| %>
-			    			<% if gnome.route_id == route.id %>
-			    			<div>
+			    			<% if gnome.route_id == route.id  %>
+			    			<article>
 			    				<p><%= gnome.gnome_name %></p>
 			    				<p><%= gnome.g_description %></p>
 			    				<p>X: <%= gnome.location_x %> Y: <%= gnome.location_y %></p>
-			    				
-			    			</div>
+			    			</article>
 			    			<% end %>
 			    		<% end %>
 			    	</section>
@@ -56,16 +68,48 @@ System naprowadzania i zarządzania wrocławskim krasnalami!
   			<% if profile.role_id == 2 %>
   				<%= render @user %>
 
-				<div>
+				<article>
 				  <%= link_to "Edit this user", edit_user_path(@user) %> |
 				  <%= link_to "Back to users", users_path %>
-				</div>
+				</article>
   			<% end %>
   			<% if profile.role_id == 3 %>
   			<% end %>
   		<% end %>
   	<% end %>
-    
+
+    <div id="map"></div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+
+    <script type="module" src="./geo.js"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZD9M2GdEHVuqyA5m0rvCX6DUPuSzrits&callback=initMap&v=weekly"
+      defer
+    ></script>
+    <a href="marker.js">safasgasgas</a>
+
+    <script type="module" src="./marker.js"></script>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map1"></div>
+
+    <!-- 
+     The `defer` attribute causes the callback to execute after the full HTML
+     document has been parsed. For non-blocking uses, avoiding race conditions,
+     and consistent behavior across browsers, consider loading using Promises
+     with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+    -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZD9M2GdEHVuqyA5m0rvCX6DUPuSzrits&callback=initMap1&v=weekly"
+      defer
+    ></script>
+
   <% end %>
 <% else %>
   Nie jesteś zalogowany.

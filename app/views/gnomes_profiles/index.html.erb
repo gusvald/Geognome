@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Gnomes profiles</h1>
+
+<div id="gnomes_profiles">
+  <% @gnomes_profiles.each do |gnomes_profile| %>
+    <%= render gnomes_profile %>
+    <p>
+      <%= link_to "Show this gnomes profile", gnomes_profile %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New gnomes profile", new_gnomes_profile_path %>

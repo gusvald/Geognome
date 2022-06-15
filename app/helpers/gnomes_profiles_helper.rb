@@ -1,0 +1,2 @@
+module GnomesProfilesHelper
+end
